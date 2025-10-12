@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="TaskManagerApp/TaskManagerApp.csproj" />
+  <Project Path="DataAccess/DataAccess.csproj" />
+  <Project Path="TaskManagerApp/TaskManager.csproj">
+    <BuildDependency Project="DataAccess/DataAccess.csproj" />
+  </Project>
 </Solution>
