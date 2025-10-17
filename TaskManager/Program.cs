@@ -18,7 +18,7 @@ internal class Program
         string connectionString = new ConfigurationBuilder().AddUserSecrets<Program>().Build().GetConnectionString("DefaultConnection")!;
 
         var sqlConnection = new SqlServerConnectionFactory(connectionString);
-        IRepository<IConnectionFactory> taskRepository = new TasksRepository(sqlConnection);
+        var taskRepository = new TasksRepository(sqlConnection);
         var taskService = new TaskService(taskRepository);
 
         Console.WriteLine("\nInitial state:");
@@ -41,9 +41,12 @@ internal class Program
     {
         foreach (var task in tasks)
         {
-            string isCompletedEmoji = task.IsCompleted ? "V" : "X";
+            string isCompletedEmoji = task.IsCompleted ? _isCompletedTrueSymbol : _isCompletedFalseSymbol;
             Console.WriteLine($"{task.Id}) {task.Title}: {task.Description} ({isCompletedEmoji})");
         }
         Console.WriteLine($"Tasks total: {tasks.ToArray().Length}");
     }
+
+    private static readonly string _isCompletedTrueSymbol = "V";
+    private static readonly string _isCompletedFalseSymbol = "X";
 }
