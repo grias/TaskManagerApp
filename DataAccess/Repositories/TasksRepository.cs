@@ -3,7 +3,7 @@ using Dapper;
 using Domain.Interfaces;
 using Domain.Models;
 
-namespace DataAccess.Repositories;
+namespace DataAccess;
 
 public class TasksRepository : IRepository<TaskModel>
 {
