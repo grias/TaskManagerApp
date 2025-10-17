@@ -1,10 +1,7 @@
-﻿using Dapper;
-using DataAccess;
-using DataAccess.ConnectionFactories;
+﻿using DataAccess.ConnectionFactories;
 using Microsoft.Extensions.Configuration;
 using Domain.Models;
 using Domain.Services;
-using Domain.Interfaces;
 using DataAccess.Repositories;
 
 
