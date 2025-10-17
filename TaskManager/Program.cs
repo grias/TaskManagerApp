@@ -24,7 +24,8 @@ internal class Program
         Console.WriteLine("\nInitial state:");
         DisplayTasks(taskService.GetAllTasks());
 
-        var newTask = taskService.AddTask(new TaskModel() { Title = "Groceries", Description = "Buy milk, eggs and beer" });
+        var taskToAdd = new TaskModel() { Title = "Groceries", Description = "Buy milk, eggs and beer" };
+        var newTask = taskService.AddTask(taskToAdd);
         Console.WriteLine("\nAdding new task:");
         DisplayTasks(taskService.GetAllTasks());
 
