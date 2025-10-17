@@ -1,10 +1,12 @@
 ﻿using Dapper;
 using DataAccess;
 using DataAccess.ConnectionFactories;
-using DataAccess.Models;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System.Diagnostics.Metrics;
+using Domain.Models;
+using Domain.Services;
+using Domain.Interfaces;
+using DataAccess.Repositories;
+
 
 namespace TaskManager;
 
@@ -15,22 +17,24 @@ internal class Program
         //string connectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("DefaultConnection")!;
         string connectionString = new ConfigurationBuilder().AddUserSecrets<Program>().Build().GetConnectionString("DefaultConnection")!;
 
-        var taskMaster = new TaskMaster(new TasksRepository(new SqlServerConnectionFactory(connectionString)));
+        var sqlConnection = new SqlServerConnectionFactory(connectionString);
+        IRepository<IConnectionFactory> taskRepository = new TasksRepository(sqlConnection);
+        var taskService = new TaskService(taskRepository);
 
         Console.WriteLine("\nInitial state:");
-        DisplayTasks(taskMaster.GetAllTasks());
+        DisplayTasks(taskService.GetAllTasks());
 
-        var newTask = taskMaster.AddTask(new TaskModel() { Title = "Groceries", Description = "Buy milk, eggs and beer" });
+        var newTask = taskService.AddTask(new TaskModel() { Title = "Groceries", Description = "Buy milk, eggs and beer" });
         Console.WriteLine("\nAdding new task:");
-        DisplayTasks(taskMaster.GetAllTasks());
+        DisplayTasks(taskService.GetAllTasks());
 
-        taskMaster.TryCompleteTaskById(newTask.Id);
+        taskService.TryCompleteTaskById(newTask.Id);
         Console.WriteLine("\nCompleting it:");
-        DisplayTasks(taskMaster.GetAllTasks());
+        DisplayTasks(taskService.GetAllTasks());
 
-        taskMaster.TryDeleteTaskById(newTask.Id);
+        taskService.TryDeleteTaskById(newTask.Id);
         Console.WriteLine("\nDeleting it:");
-        DisplayTasks(taskMaster.GetAllTasks());
+        DisplayTasks(taskService.GetAllTasks());
     }
 
     private static void DisplayTasks(List<TaskModel> tasks)

@@ -1,13 +1,13 @@
-﻿using DataAccess;
-using DataAccess.Models;
+﻿using Domain.Interfaces;
+using Domain.Models;
 
-namespace TaskManager;
+namespace Domain.Services;
 
-internal class TaskMaster
+public class TaskService
 {
-    private readonly TasksRepository _tasksRepository;
+    private readonly IRepository<TaskModel> _tasksRepository;
 
-    public TaskMaster(TasksRepository tasksRepository)
+    public TaskService(IRepository<TaskModel> tasksRepository)
     {
         _tasksRepository = tasksRepository;
     }

@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace DataAccess.ConnectionFactories;
+namespace Domain.Interfaces;
 
 public interface IConnectionFactory
 {

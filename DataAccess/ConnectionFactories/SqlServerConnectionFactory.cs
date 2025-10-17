@@ -1,5 +1,6 @@
 ﻿using System.Data.Common;
 using Microsoft.Data.SqlClient;
+using Domain.Interfaces;
 
 namespace DataAccess.ConnectionFactories;
 

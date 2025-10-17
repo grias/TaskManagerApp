@@ -1,6 +1,5 @@
 <Solution>
   <Project Path="DataAccess/DataAccess.csproj" />
-  <Project Path="TaskManagerApp/TaskManager.csproj">
-    <BuildDependency Project="DataAccess/DataAccess.csproj" />
-  </Project>
+  <Project Path="Domain/Domain.csproj" Id="ce6e04fc-5a6e-4212-ba75-20443a5dfb06" />
+  <Project Path="TaskManager/TaskManager.csproj" />
 </Solution>

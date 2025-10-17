@@ -1,9 +1,9 @@
 ﻿
 using Dapper;
-using DataAccess.ConnectionFactories;
-using DataAccess.Models;
+using Domain.Interfaces;
+using Domain.Models;
 
-namespace DataAccess;
+namespace DataAccess.Repositories;
 
 public class TasksRepository : IRepository<TaskModel>
 {
