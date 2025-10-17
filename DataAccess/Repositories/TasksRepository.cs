@@ -1,5 +1,4 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using Domain.Interfaces;
 using Domain.Models;
 
